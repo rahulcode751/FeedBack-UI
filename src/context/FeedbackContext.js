@@ -47,7 +47,8 @@ export const FeedbackProvider = ({ children }) => {  /// we are wrapping
         feedback: feedback,
         deleteFeedback,
         addFeedback,
-        editFeedback
+        editFeedback,
+        feedbackEdit
     }}>
         {children}
     </FeedbackContext.Provider>

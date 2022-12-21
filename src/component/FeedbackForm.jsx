@@ -6,17 +6,25 @@ import RatingSelect from "./RatingSelect";
 
 import { useState } from "react";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import FeedbackContext from "../context/FeedbackContext";
 
 // function FeedbackForm({ handleAdd }) {  /// without context
 function FeedbackForm() {
-  const { addFeedback } = useContext(FeedbackContext); /// context
-
   const [text, setText] = useState("");
   const [rating, setRating] = useState(10);
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message, setMessage] = useState("");
+
+  const { addFeedback, feedbackEdit } = useContext(FeedbackContext); /// context
+  useEffect(() => {
+    if (feedbackEdit.edit === true) {
+      setBtnDisabled(false);
+      setText(feedbackEdit.item.text);
+      setRating(feedbackEdit.item.rating);
+    }
+    // console.log("Hello");
+  }, [feedbackEdit]);
 
   const handleTextChange = (e) => {
     if (text === "") {
