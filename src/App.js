@@ -9,6 +9,7 @@ import AboutPage from "./pages/AboutPage";
 import AboutIconLink from "./component/AboutIconLink";
 import Card from "./component/shared/Card";
 import Post from "./component/Post";
+import { FeedbackProvider } from "./context/FeedbackContext";
 import { v4 as uuidv4 } from 'uuid'
 
 function App() {
@@ -45,63 +46,82 @@ function App() {
         setFeedback([newFeedback, ...feedback])
     }
     return (
-        <Router>
-            {/* <Header bgColor="blue" textColor="white" text="Feedback" /> */}
-            <Header />
-            <div className="container">
-                <Routes>
-                    <Route exact path='/' element={
-                        <>
-                            <FeedbackForm handleAdd={addFeedback} />
-                            <FeedbackStats feedback={feedback} />
-                            <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
-                        </>
-                    }>
-                    </Route>
-                    <Route path='/about' element={<AboutPage />} />
-                    {/* <Route path='/post/:id' element={<Post />} />
-                    <Route path='/post/:id/:name' element={<Post />} /> */}
-                    {/* <Route path='/post/*' element={<Post />} /> */}
-                </Routes>
-                {/* <Card>
-                    <NavLink to="/" activeClassName='active'>
-                        Home
-                    </NavLink>
-                    <NavLink to="/about" activeClassName='active'>
-                        About
-                    </NavLink>
-                </Card> */}
-                <AboutIconLink />
-            </div>
-            {/* <Routes path='/about'>This is the home page</Routes> */}
+        <FeedbackProvider>
+            <Router>
+                <Header />
+                <div className="container">
+                    <Routes>
+                        <Route exact path='/' element={
+                            <>
+                                <FeedbackForm handleAdd={addFeedback} />
+                                <FeedbackStats />
+                                <FeedbackList handleDelete={deleteFeedback} />
+                            </>
+                        }>
+                        </Route>
+                        <Route path='/about' element={<AboutPage />} />
+                    </Routes>
+                    <AboutIconLink />
+                </div>
+            </Router >
+        </FeedbackProvider>
+        // <Router>
+        //     {/* <Header bgColor="blue" textColor="white" text="Feedback" /> */}
+        //     <Header />
+        //     <div className="container">
+        //         <Routes>
+        //             <Route exact path='/' element={
+        //                 <>
+        //                     <FeedbackForm handleAdd={addFeedback} />
+        //                     <FeedbackStats feedback={feedback} />
+        //                     <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+        //                 </>
+        //             }>
+        //             </Route>
+        //             <Route path='/about' element={<AboutPage />} />
+        //             {/* <Route path='/post/:id' element={<Post />} />
+        //             <Route path='/post/:id/:name' element={<Post />} /> */}
+        //             {/* <Route path='/post/*' element={<Post />} /> */}
+        //         </Routes>
+        //         {/* <Card>
+        //             <NavLink to="/" activeClassName='active'>
+        //                 Home
+        //             </NavLink>
+        //             <NavLink to="/about" activeClassName='active'>
+        //                 About
+        //             </NavLink>
+        //         </Card> */}
+        //         <AboutIconLink />
+        //     </div>
+        //     {/* <Routes path='/about'>This is the home page</Routes> */}
 
-            {/* <Routes>
-                    <Route path="/" component={AboutPage}></Route>
-                </Routes>  */}
-            {/* <h1>{title}</h1>
-            <p>{body}</p>
-            {showComments ? (
-                <div className="comments">
-                    <h3>Comments ({comments.length})</h3>
-                    <ul>
-                        {comments.map((comment, index) => (
-                            <li key={index}>{comment.text}</li>
-                        ))}
-                    </ul>
-                </div>) : null
-            }
-            {showComments && (
-                <div className="comments">
-                    <h3>Comments ({comments.length})</h3>
-                    <ul>
-                        {comments.map((comment, index) => (
-                            <li key={index}>{comment.text}</li>
-                        ))}
-                    </ul>
-                </div>)
-            }
-            {showComments && commentBlock} */}
-        </Router >
+        //     {/* <Routes>
+        //             <Route path="/" component={AboutPage}></Route>
+        //         </Routes>  */}
+        //     {/* <h1>{title}</h1>
+        //     <p>{body}</p>
+        //     {showComments ? (
+        //         <div className="comments">
+        //             <h3>Comments ({comments.length})</h3>
+        //             <ul>
+        //                 {comments.map((comment, index) => (
+        //                     <li key={index}>{comment.text}</li>
+        //                 ))}
+        //             </ul>
+        //         </div>) : null
+        //     }
+        //     {showComments && (
+        //         <div className="comments">
+        //             <h3>Comments ({comments.length})</h3>
+        //             <ul>
+        //                 {comments.map((comment, index) => (
+        //                     <li key={index}>{comment.text}</li>
+        //                 ))}
+        //             </ul>
+        //         </div>)
+        //     }
+        //     {showComments && commentBlock} */}
+        // </Router >
     )
 }
 export default App;
