@@ -6,7 +6,13 @@ import RatingSelect from "./RatingSelect";
 
 import { useState } from "react";
 
-function FeedbackForm({ handleAdd }) {
+import { useContext } from "react";
+import FeedbackContext from "../context/FeedbackContext";
+
+// function FeedbackForm({ handleAdd }) {  /// without context
+function FeedbackForm() {
+  const { addFeedback } = useContext(FeedbackContext); /// context
+
   const [text, setText] = useState("");
   const [rating, setRating] = useState(10);
   const [btnDisabled, setBtnDisabled] = useState(true);
@@ -33,7 +39,8 @@ function FeedbackForm({ handleAdd }) {
       };
       //  console.log(newFeedback);
 
-      handleAdd(newFeedback);
+      // handleAdd(newFeedback);
+      addFeedback(newFeedback);
 
       setText("");
     }

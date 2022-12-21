@@ -53,8 +53,11 @@ function App() {
                     <Routes>
                         <Route exact path='/' element={
                             <>
-                                <FeedbackForm handleAdd={addFeedback} />
+                                {/* <FeedbackForm handleAdd={addFeedback} /> */}
+                                <FeedbackForm />
+                                {/* <FeedbackStats feedback={feedback} /> */}
                                 <FeedbackStats />
+                                {/* <FeedbackList handleDelete={deleteFeedback} /> */}
                                 <FeedbackList handleDelete={deleteFeedback} />
                             </>
                         }>
