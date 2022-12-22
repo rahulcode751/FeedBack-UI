@@ -31,14 +31,14 @@
       "text": "This is feedback item 6 comming from json server backend"
     },
     {
-      "id": 7,
-      "rating": "7",
-      "text": "This is feedback item 7 comming from json server backend"
+      "text": "srysetybesr a eyteusrhtr",
+      "rating": 4,
+      "id": 8
     },
     {
-      "rating": "7",
-      "text": "This is feedback item 8 comming from json server backend",
-      "id": 8
+      "text": " yrytteryukjhgfdsfghjkhgfdghjkjhgfd",
+      "rating": 5,
+      "id": 9
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { v4 as uuidv4 } from 'uuid'
+// import { v4 as uuidv4 } from 'uuid'
 import FeedbackData from "../data/FeedbackData";
 
 
@@ -34,7 +34,11 @@ export const FeedbackProvider = ({ children }) => {  /// we are wrapping
 
     /// Fetch feedback
     const fetchFeedback = async () => {
-        const response = await fetch(`http://localhost:5000/feedback?_sort=id&_order=desc`)  /// it will sort on the bases on id in descending order  . fetch api promise return krta h
+        // const response = await fetch(`http://localhost:5000/feedback?_sort=id&_order=desc`)  
+        const response = await fetch(`/feedback?_sort=id&_order=desc`)
+        ///feedback 
+        /// proxy me dal dia local host link package.json me
+        /// it will sort on the bases on id in descending order  . fetch api promise return krta h
         const data = await response.json();
         //console.log(data);
         setFeedback(data);
@@ -42,16 +46,29 @@ export const FeedbackProvider = ({ children }) => {  /// we are wrapping
     }
 
     // delete feedback
-    const deleteFeedback = (id) => {
+    const deleteFeedback = async (id) => {
+        // if (window.confirm('Are you sure you want to delete?')) {
+        //     setFeedback(feedback.filter((item) => item.id !== id))
+        // }
         if (window.confirm('Are you sure you want to delete?')) {
+            await fetch(`/feedback/${id}`, { method: 'DELETE' })
+
             setFeedback(feedback.filter((item) => item.id !== id))
         }
     }
     // add feedback
-    const addFeedback = (newFeedback) => {
-        newFeedback.id = uuidv4()
+    const addFeedback = async (newFeedback) => {
+        const response = await fetch('/feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newFeedback)
+        })
+        //  newFeedback.id = uuidv4()
+        const data = await response.json();
         console.log(newFeedback)
-        setFeedback([newFeedback, ...feedback])
+        setFeedback([data, ...feedback])
     }
     /// Set item to be updated
     const editFeedback = (item) => {
@@ -61,9 +78,25 @@ export const FeedbackProvider = ({ children }) => {  /// we are wrapping
         })
     }
     /// update feedback item
-    const updateFeedback = (id, updItem) => {
-        console.log(id, updItem);
-        setFeedback(feedback.map((item) => item.id === id ? { ...item, ...updItem } : item))
+    const updateFeedback = async (id, updItem) => {
+        // console.log(id, updItem);
+        // setFeedback(feedback.map((item) => item.id === id ? { ...item, ...updItem } : item))
+        const response = await fetch(`/feedback/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updItem),
+        })
+
+        const data = await response.json()
+
+        // NOTE: no need to spread data and item
+        setFeedback(feedback.map((item) => (item.id === id ? data : item)))
+        setFeedbackEdit({
+            item: {},
+            edit: false,
+        })
     }
     return <FeedbackContext.Provider value={{
         feedback: feedback,
