@@ -1,11 +1,14 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid'
 import FeedbackData from "../data/FeedbackData";
+
 
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {  /// we are wrapping
-    const [feedback, setFeedback] = useState(FeedbackData
+    const [isLoading, setIsLoading] = useState(true);
+    const [feedback, setFeedback] = useState([]
+        //FeedbackData
         //    [
         //     {
         //         id: 1,
@@ -23,6 +26,21 @@ export const FeedbackProvider = ({ children }) => {  /// we are wrapping
         item: {},
         edit: false
     })
+
+    useEffect(() => {
+        //console.log(123)
+        fetchFeedback();
+    }, []);
+
+    /// Fetch feedback
+    const fetchFeedback = async () => {
+        const response = await fetch(`http://localhost:5000/feedback?_sort=id&_order=desc`)  /// it will sort on the bases on id in descending order  . fetch api promise return krta h
+        const data = await response.json();
+        //console.log(data);
+        setFeedback(data);
+        setIsLoading(false);
+    }
+
     // delete feedback
     const deleteFeedback = (id) => {
         if (window.confirm('Are you sure you want to delete?')) {
@@ -53,7 +71,8 @@ export const FeedbackProvider = ({ children }) => {  /// we are wrapping
         addFeedback,
         editFeedback,
         feedbackEdit,
-        updateFeedback
+        updateFeedback,
+        isLoading
     }}>
         {children}
     </FeedbackContext.Provider>
