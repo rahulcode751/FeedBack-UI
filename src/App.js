@@ -57,7 +57,7 @@ function App() {
                                 <FeedbackForm />
                                 {/* <FeedbackStats feedback={feedback} /> */}
                                 <FeedbackStats />
-                                {/* <FeedbackList handleDelete={deleteFeedback} /> */}
+                                {/* <FeedbackList  feedback={feedback} handleDelete={deleteFeedback} /> */}
                                 <FeedbackList handleDelete={deleteFeedback} />
                             </>
                         }>
