@@ -1,8 +1,9 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import { useState } from "react";
+import FeedbackData from "./data/FeedbackData";
+
 import Header from "./component/Header";
 import FeedbackList from "./component/FeedbackList";
-import FeedbackData from "./data/FeedbackData";
 import FeedbackStats from "./component/FeedbackStats";
 import FeedbackForm from "./component/FeedbackForm";
 import AboutPage from "./pages/AboutPage";
@@ -24,8 +25,8 @@ function App() {
     // ]
 
     // const loading = false
-    // const showComments = true
     // if (loading) return <h1>Loading...</h1>
+    // const showComments = true
 
     // const commentBlock = (<div className="comments">
     //     <h3>Comments ({comments.length})</h3>
@@ -58,7 +59,7 @@ function App() {
                                 {/* <FeedbackStats feedback={feedback} /> */}
                                 <FeedbackStats />
                                 {/* <FeedbackList  feedback={feedback} handleDelete={deleteFeedback} /> */}
-                                <FeedbackList handleDelete={deleteFeedback} />
+                                <FeedbackList />
                             </>
                         }>
                         </Route>
@@ -128,3 +129,5 @@ function App() {
     )
 }
 export default App;
+
+

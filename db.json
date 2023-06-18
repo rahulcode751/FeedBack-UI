@@ -19,21 +19,6 @@
       "id": 4,
       "rating": 8.5,
       "text": "This is feedback item 4 comming from json server backend"
-    },
-    {
-      "id": 5,
-      "rating": 8,
-      "text": "This is feedback item 5 comming from json server backend"
-    },
-    {
-      "id": 6,
-      "rating": 7.5,
-      "text": "This is feedback item 6 comming from json server backend"
-    },
-    {
-      "id": 7,
-      "rating": 7,
-      "text": "This is feedback item 7 comming from json server backend"
     }
   ]
 }

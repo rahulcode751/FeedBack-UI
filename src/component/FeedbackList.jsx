@@ -31,7 +31,7 @@ function FeedbackList() {
             <FeedbackItem
               key={item.id}
               item={item}
-              // handleDelete={handleDelete} // we will not pas it as props bcz of useContext and this FeedbackContext
+            // handleDelete={handleDelete} // we will not pas it as props bcz of useContext and this FeedbackContext
             />
           </motion.div>
         ))}
